@@ -1,0 +1,56 @@
+N = 10000;
+P =[0 0 1 0 0 0;
+    0 0 1 0 0 0;
+    1/4 1/4 0 1/4 1/4 0;
+    0 0 1/2 0 0 1/2;
+    0 0 1/2 0 0 1/2;
+    0 0 0 1/2 1/2 0
+    ];
+
+
+[fil, col] = size(P);
+
+cdf = cumsum(P,2);
+
+matrix = [];
+count = zeros([1 fil]);
+
+i = randi([1 fil]);
+
+for k = 1:N % Parte e
+    u = rand; % Parte b
+    
+    matrix = [matrix; count];
+    
+    count(i) = count(i) + 1; %Parte a
+
+    for j = 1:col-1 
+        if u < cdf(i,1)
+            i = 1;
+            break;
+        
+        else
+            if cdf(i,j) < u && u <= cdf(i,j+1) % Parte d
+                i = j+1;
+                break;
+            end
+        end
+    end
+end
+
+% Ya se tienen los datos, se procede a graficar
+x = 1:N;
+ys = matrix'/N;
+
+plot(x, ys(1,:))
+
+c1 = count(1)/N;
+c2 = count(2)/N;
+c3 = count(3)/N;
+c4 = count(4)/N;
+c5 = count(5)/N;
+c6 = count(6)/N;
+total = c1+c2+c3+c4+c5+c6;
+
+fprintf("Probabilidades: %f, %f, %f, %f, %f, %f = %f\n", c1, c2, c3, c4, c5, c6, total);
+
