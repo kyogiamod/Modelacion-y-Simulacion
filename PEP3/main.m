@@ -1,4 +1,4 @@
-N = 10;
+N = 100;
 
 P = getP();
 [fil, col] = size(P);
@@ -38,3 +38,5 @@ hold on;
 for i = 1:fil
     plot(x, ys(i,:));
 end
+
+

@@ -1,13 +1,6 @@
-N = 10000;
-P =[0 0 1 0 0 0;
-    0 0 1 0 0 0;
-    1/4 1/4 0 1/4 1/4 0;
-    0 0 1/2 0 0 1/2;
-    0 0 1/2 0 0 1/2;
-    0 0 0 1/2 1/2 0
-    ];
+N = 100;
 
-
+P = getP();
 [fil, col] = size(P);
 
 cdf = cumsum(P,2);
@@ -39,18 +32,11 @@ for k = 1:N % Parte e
 end
 
 % Ya se tienen los datos, se procede a graficar
-x = 1:N;
+x = 0:N-1;
 ys = matrix'/N;
+hold on;
+for i = 1:fil
+    plot(x, ys(i,:));
+end
 
-plot(x, ys(1,:))
-
-c1 = count(1)/N;
-c2 = count(2)/N;
-c3 = count(3)/N;
-c4 = count(4)/N;
-c5 = count(5)/N;
-c6 = count(6)/N;
-total = c1+c2+c3+c4+c5+c6;
-
-fprintf("Probabilidades: %f, %f, %f, %f, %f, %f = %f\n", c1, c2, c3, c4, c5, c6, total);
 
