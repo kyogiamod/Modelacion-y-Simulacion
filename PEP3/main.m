@@ -1,4 +1,4 @@
-N = 100;
+N = 1000;
 
 P = getP();
 [fil, col] = size(P);
@@ -13,7 +13,7 @@ i = randi([1 fil]);
 for k = 1:N % Parte e
     u = rand; % Parte b
     
-    matrix = [matrix; count];
+    matrix = [matrix; count/k];
     
     count(i) = count(i) + 1; %Parte a
 
@@ -35,8 +35,14 @@ end
 x = 0:N-1;
 ys = matrix'/N;
 hold on;
+xlabel('Numero de saltos N');
+ylabel('Probabilidad');
 for i = 1:fil
     plot(x, ys(i,:));
+end
+
+for i=1:col
+    fprintf('Convergencia nodo %d: %f\n', i, matrix(end, i));
 end
 
 

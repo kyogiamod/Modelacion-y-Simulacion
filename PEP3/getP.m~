@@ -1,5 +1,0 @@
-function [P] = getP()
-P = [
-    ]
-end
-
